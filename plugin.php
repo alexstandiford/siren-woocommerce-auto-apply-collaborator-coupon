@@ -11,7 +11,7 @@ use Novatorius\Updater\Interfaces\VersionProvider;
 use PHPNomad\Core\Facades\Event;
 use PHPNomad\Core\Facades\InstanceProvider;
 use PHPNomad\Core\Facades\Logger;
-use PHPNomad\Database\Exceptions\RecordNotFoundException;
+use PHPNomad\Datastore\Exceptions\RecordNotFoundException;
 use PHPNomad\Utils\Helpers\Arr;
 use Siren\Collaborators\Core\Facades\CollaboratorAliases;
 use Siren\Engagements\Core\Events\EngagementsTriggered;
