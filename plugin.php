@@ -4,7 +4,7 @@
  * Description: Automatically applies a collaborator's coupon code when their referral link triggers an engagement.
  * Author: Novatorius, LLC
  * Author URI: https://sirenaffiliates.com
- * Version: 1.0.0
+ * Version: 1.0.1
  */
 
 use Novatorius\Updater\Interfaces\VersionProvider;
