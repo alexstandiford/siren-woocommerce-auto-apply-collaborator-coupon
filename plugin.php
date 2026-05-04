@@ -4,27 +4,28 @@
  * Description: Automatically applies a collaborator's coupon code when their referral link triggers an engagement.
  * Author: Novatorius, LLC
  * Author URI: https://sirenaffiliates.com
- * Version: 1.0.1
+ * Version: 1.0.2
  */
 
-use Novatorius\Updater\Interfaces\VersionProvider;
 use PHPNomad\Core\Facades\Event;
 use PHPNomad\Core\Facades\InstanceProvider;
 use PHPNomad\Core\Facades\Logger;
 use PHPNomad\Datastore\Exceptions\RecordNotFoundException;
 use PHPNomad\Utils\Helpers\Arr;
 use Siren\Collaborators\Core\Facades\CollaboratorAliases;
+use Siren\Core\Interfaces\VersionProvider;
 use Siren\Engagements\Core\Events\EngagementsTriggered;
 use Siren\Engagements\Core\Models\Engagement;
-use Siren\WordPress\Core\Providers\AdminNoticeProvider;
 
 add_action('siren_ready', function () {
     $version = InstanceProvider::get(VersionProvider::class);
 
-    if(version_compare($version->getVersion(), '1.1.0','<')){
-        $notices = InstanceProvider::get(AdminNoticeProvider::class);
-
-        $notices->addNotice('Siren\'s Auto apply collaborator coupons plugin requires siren 1.1.0 or greater. Coupons will not apply until you update Siren.', 'warning');
+    if (version_compare($version->getVersion(), '3.0.0', '<')) {
+        add_action('admin_notices', function () {
+            echo '<div class="notice notice-warning"><p>' .
+                esc_html__("Siren's Auto Apply Collaborator Coupons plugin requires Siren 3.0.0 or greater. Coupons will not apply until you update Siren.", 'siren-auto-apply-coupon') .
+                '</p></div>';
+        });
     }
 
     Event::attach(EngagementsTriggered::class, function (EngagementsTriggered $event) {
